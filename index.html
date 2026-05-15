@@ -579,22 +579,24 @@
             <a href="https://rifatewu.blogspot.com" target="_blank" rel="noreferrer" class="lift-card rounded border border-cyan-300/15 px-4 py-3 text-blueprint-ink hover:text-blueprint-cyan">Blog · rifatewu</a>
           </div>
         </div>
-        <form id="contactForm" class="blueprint-panel reveal rounded p-6 sm:p-8" style="--delay: 120ms;">
+        <form id="contactForm" class="blueprint-panel reveal rounded p-6 sm:p-8" action="https://api.web3forms.com/submit" method="POST" style="--delay: 120ms;">
           <div class="grid gap-5">
+            <input type="hidden" name="access_key" value="fab8aee3-ee14-44bd-93c0-6544f89e1dee" />
+            <input type="hidden" name="subject" value="New portfolio message for Md. Mainul Hasan" />
+            <input type="hidden" name="from_name" value="Md. Mainul Hasan Portfolio" />
             <label class="grid gap-2">
               <span class="font-mono text-sm text-blueprint-cyan">Name</span>
-              <input class="form-input rounded px-4 py-3" name="name" type="text" autocomplete="name" placeholder="Your name" />
+              <input class="form-input rounded px-4 py-3" name="name" type="text" autocomplete="name" placeholder="Your name" required />
             </label>
             <label class="grid gap-2">
               <span class="font-mono text-sm text-blueprint-cyan">Email</span>
-              <input class="form-input rounded px-4 py-3" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+              <input class="form-input rounded px-4 py-3" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
             </label>
             <label class="grid gap-2">
               <span class="font-mono text-sm text-blueprint-cyan">Message</span>
-              <textarea class="form-input min-h-36 rounded px-4 py-3" name="message" placeholder="What are you building?"></textarea>
+              <textarea class="form-input min-h-36 rounded px-4 py-3" name="message" placeholder="What are you building?" required></textarea>
             </label>
             <button class="inline-flex items-center justify-center border border-cyan-300/60 bg-blueprint-cyan px-5 py-3 font-mono text-sm font-bold text-[#06111d] shadow-glow transition hover:-translate-y-0.5 hover:bg-white" type="submit">Send Message</button>
-            <p id="formStatus" class="hidden font-mono text-sm text-blueprint-green" role="status">Message UI ready. Please use email for delivery.</p>
           </div>
         </form>
       </div>
@@ -677,11 +679,6 @@
         menuButton.setAttribute('aria-expanded', 'false');
         menuIcon.innerHTML = '<path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
       });
-    });
-
-    document.querySelector('#contactForm').addEventListener('submit', (event) => {
-      event.preventDefault();
-      document.querySelector('#formStatus').classList.remove('hidden');
     });
 
     document.querySelector('#year').textContent = new Date().getFullYear();
