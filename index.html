@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Md. Mainul Hasan, Software Engineer, Team Lead, and Backend Specialist from Rajshahi, Bangladesh." />
+  <title>Md. Mainul Hasan | Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            blueprint: {
+              bg: '#0a0f1a',
+              panel: '#0f1726',
+              ink: '#e8eaf0',
+              mute: '#94a3b8',
+              line: '#4a5568',
+              cyan: '#00e5ff',
+              green: '#68f5a6',
+              amber: '#ffd166'
+            }
+          },
+          fontFamily: {
+            sans: ['DM Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(0,229,255,.25), 0 18px 45px rgba(0,229,255,.08)',
+            soft: '0 24px 70px rgba(0,0,0,.28)'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --bg: #0a0f1a;
+      --panel: rgba(15, 23, 38, .78);
+      --cyan: #00e5ff;
+      --ink: #e8eaf0;
+      --muted: #94a3b8;
+      --line: rgba(0, 229, 255, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 1px 1px, rgba(0, 229, 255, .12) 1px, transparent 0) 0 0 / 28px 28px,
+        linear-gradient(rgba(0, 229, 255, .035) 1px, transparent 1px) 0 0 / 84px 84px,
+        linear-gradient(90deg, rgba(0, 229, 255, .035) 1px, transparent 1px) 0 0 / 84px 84px,
+        radial-gradient(circle at top left, rgba(0, 229, 255, .14), transparent 28rem),
+        radial-gradient(circle at 75% 12%, rgba(104, 245, 166, .07), transparent 24rem),
+        #0a0f1a;
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(10, 15, 26, .1), rgba(10, 15, 26, .9));
+      z-index: -1;
+    }
+
+    ::selection {
+      background: rgba(0, 229, 255, .22);
+      color: #ffffff;
+    }
+
+    .font-mono {
+      letter-spacing: 0;
+    }
+
+    .nav-link {
+      color: rgba(232, 234, 240, .72);
+      transition: color .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      color: var(--cyan);
+      border-color: rgba(0, 229, 255, .45);
+      background: rgba(0, 229, 255, .07);
+    }
+
+    .blueprint-panel {
+      border: 1px solid rgba(0, 229, 255, .12);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.04), transparent 38%),
+        rgba(15, 23, 38, .76);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, .25);
+      backdrop-filter: blur(14px);
+    }
+
+    .terminal-frame {
+      border: 1px solid rgba(0, 229, 255, .18);
+      background:
+        linear-gradient(180deg, rgba(0, 229, 255, .08), transparent 58px),
+        rgba(8, 13, 24, .9);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 28px 90px rgba(0,0,0,.34);
+    }
+
+    .type-cursor::after {
+      content: "";
+      display: inline-block;
+      width: .62ch;
+      height: 1.05em;
+      margin-left: .16rem;
+      background: var(--cyan);
+      vertical-align: -.14em;
+      animation: blink 1s steps(2, start) infinite;
+      box-shadow: 0 0 18px rgba(0, 229, 255, .75);
+    }
+
+    .hero-stagger {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: heroFade .78s cubic-bezier(.2, .8, .2, 1) forwards;
+      animation-delay: var(--delay, 0ms);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .65s ease, transform .65s ease;
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skill-pill {
+      opacity: 0;
+      transform: translateX(-18px);
+      transition: opacity .55s ease, transform .55s ease, border-color .22s ease, background .22s ease;
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .in-view .skill-pill,
+    .skill-pill.in-view {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .lift-card {
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease, background .22s ease;
+    }
+
+    .lift-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 229, 255, .48);
+      box-shadow: 0 0 0 1px rgba(0,229,255,.16), 0 18px 46px rgba(0, 229, 255, .08);
+      background: rgba(15, 23, 38, .9);
+    }
+
+    .timeline-dot {
+      box-shadow: 0 0 0 7px rgba(0, 229, 255, .08), 0 0 22px rgba(0, 229, 255, .7);
+      animation: pulseGlow 2.2s ease-in-out infinite;
+    }
+
+    .project-card .stack-reveal {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(8px);
+      transition: max-height .35s ease, opacity .25s ease, transform .25s ease;
+    }
+
+    .project-card:hover .stack-reveal,
+    .project-card:focus-within .stack-reveal {
+      max-height: 180px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-kicker::before {
+      content: "";
+      display: inline-block;
+      width: 34px;
+      height: 1px;
+      margin-right: .75rem;
+      background: var(--cyan);
+      box-shadow: 0 0 16px rgba(0, 229, 255, .7);
+      vertical-align: middle;
+    }
+
+    .form-input {
+      width: 100%;
+      border: 1px solid rgba(0, 229, 255, .14);
+      background: rgba(4, 9, 18, .62);
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .form-input:focus {
+      border-color: rgba(0, 229, 255, .65);
+      box-shadow: 0 0 0 4px rgba(0, 229, 255, .08);
+      background: rgba(4, 9, 18, .82);
+    }
+
+    @keyframes blink {
+      0%, 45% { opacity: 1; }
+      46%, 100% { opacity: 0; }
+    }
+
+    @keyframes heroFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 0 7px rgba(0, 229, 255, .08), 0 0 18px rgba(0, 229, 255, .55);
+      }
+      50% {
+        box-shadow: 0 0 0 11px rgba(0, 229, 255, .04), 0 0 30px rgba(0, 229, 255, .85);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-cyan-300/10 bg-[#0a0f1a]/78 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <a href="#hero" class="font-mono text-sm font-bold text-blueprint-ink sm:text-base">mainul<span class="text-blueprint-cyan">.systems</span></a>
+      <button id="menuButton" class="inline-flex h-10 w-10 items-center justify-center border border-cyan-300/15 text-blueprint-ink transition hover:border-cyan-300/50 hover:text-blueprint-cyan md:hidden" type="button" aria-label="Open navigation menu" aria-expanded="false">
+        <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="hidden items-center gap-1 md:flex">
+        <a class="nav-link rounded px-3 py-2 text-sm" href="#about">About</a>
+        <a class="nav-link rounded px-3 py-2 text-sm" href="#skills">Skills</a>
+        <a class="nav-link rounded px-3 py-2 text-sm" href="#experience">Experience</a>
+        <a class="nav-link rounded px-3 py-2 text-sm" href="#projects">Projects</a>
+        <a class="nav-link rounded px-3 py-2 text-sm" href="#education">Education</a>
+        <a class="nav-link rounded px-3 py-2 text-sm" href="#awards">Awards</a>
+        <a class="nav-link rounded px-3 py-2 text-sm" href="#contact">Contact</a>
+      </div>
+    </nav>
+    <div id="mobileMenu" class="hidden border-t border-cyan-300/10 bg-[#0a0f1a]/95 px-4 pb-4 md:hidden">
+      <div class="mx-auto grid max-w-7xl gap-1 pt-3">
+        <a class="nav-link rounded px-3 py-3 text-sm" href="#about">About</a>
+        <a class="nav-link rounded px-3 py-3 text-sm" href="#skills">Skills</a>
+        <a class="nav-link rounded px-3 py-3 text-sm" href="#experience">Experience</a>
+        <a class="nav-link rounded px-3 py-3 text-sm" href="#projects">Projects</a>
+        <a class="nav-link rounded px-3 py-3 text-sm" href="#education">Education</a>
+        <a class="nav-link rounded px-3 py-3 text-sm" href="#awards">Awards</a>
+        <a class="nav-link rounded px-3 py-3 text-sm" href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="relative mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+      <div class="grid w-full items-center gap-10 lg:grid-cols-[1.1fr_.9fr]">
+        <div>
+          <p class="hero-stagger mb-4 font-mono text-sm uppercase tracking-normal text-blueprint-cyan" style="--delay: 80ms;">Rajshahi, Bangladesh</p>
+          <h1 class="hero-stagger max-w-5xl font-mono text-5xl font-extrabold leading-[1.02] text-white sm:text-6xl lg:text-7xl" style="--delay: 210ms;">Md. Mainul Hasan</h1>
+          <p class="hero-stagger mt-5 text-xl font-semibold text-blueprint-ink sm:text-2xl" style="--delay: 360ms;">Software Engineer · Team Lead · Backend Specialist</p>
+          <p class="hero-stagger mt-5 max-w-3xl font-mono text-lg text-blueprint-cyan sm:text-2xl" style="--delay: 510ms;">
+            <span class="text-blueprint-mute">$ role:</span>
+            <span id="typewriter" class="type-cursor text-blueprint-cyan"></span>
+          </p>
+          <p class="hero-stagger mt-7 max-w-2xl text-lg leading-8 text-blueprint-mute" style="--delay: 660ms;">Dedicated software engineer with full-stack experience and deep interest in scalable system design, DevOps, and backend architecture. Currently leading a team at Roshoon and building in public.</p>
+          <blockquote class="hero-stagger mt-7 max-w-2xl border-l-2 border-cyan-300/60 pl-5 font-mono text-lg font-semibold text-blueprint-ink" style="--delay: 790ms;">"I don't just write code — I design systems that scale."</blockquote>
+          <div class="hero-stagger mt-9 flex flex-col gap-3 sm:flex-row" style="--delay: 920ms;">
+            <a href="#projects" class="inline-flex items-center justify-center border border-cyan-300/60 bg-blueprint-cyan px-5 py-3 font-mono text-sm font-bold text-[#06111d] shadow-glow transition hover:-translate-y-0.5 hover:bg-white">View Projects</a>
+            <a href="#contact" class="inline-flex items-center justify-center border border-cyan-300/20 px-5 py-3 font-mono text-sm font-bold text-blueprint-ink transition hover:-translate-y-0.5 hover:border-cyan-300/60 hover:text-blueprint-cyan">Contact Me</a>
+          </div>
+        </div>
+
+        <aside class="terminal-frame hero-stagger hidden rounded p-4 lg:block" style="--delay: 560ms;" aria-label="System profile summary">
+          <div class="mb-5 flex items-center gap-2 border-b border-cyan-300/10 pb-4">
+            <span class="h-3 w-3 rounded-full bg-red-400"></span>
+            <span class="h-3 w-3 rounded-full bg-blueprint-amber"></span>
+            <span class="h-3 w-3 rounded-full bg-blueprint-green"></span>
+            <span class="ml-2 font-mono text-xs text-blueprint-mute">profile.runtime</span>
+          </div>
+          <pre class="overflow-hidden whitespace-pre-wrap font-mono text-sm leading-7 text-blueprint-mute"><code><span class="text-blueprint-cyan">const</span> engineer = {
+  name: <span class="text-white">"Md. Mainul Hasan"</span>,
+  location: <span class="text-white">"Rajshahi, BD"</span>,
+  focus: [
+    <span class="text-white">"backend architecture"</span>,
+    <span class="text-white">"team systems"</span>,
+    <span class="text-white">"cloud learning"</span>
+  ],
+  current: <span class="text-white">"Team Lead @ Roshoon"</span>,
+  builds: <span class="text-blueprint-green">"SaaS, APIs, automation"</span>
+};</code></pre>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div class="reveal mb-10">
+        <p class="section-kicker font-mono text-sm uppercase text-blueprint-cyan">About</p>
+        <h2 class="mt-4 font-mono text-3xl font-bold text-white sm:text-4xl">Backend-first, systems-minded.</h2>
+      </div>
+      <div class="grid gap-8 lg:grid-cols-[1.05fr_.95fr]">
+        <article class="blueprint-panel reveal rounded p-6 sm:p-8">
+          <p class="text-lg leading-8 text-blueprint-mute">I am a backend-first software engineer who enjoys turning messy real-world problems into clear, maintainable systems. I care about the tradeoffs behind every endpoint, queue, schema, cache layer, and deployment path, because scale is rarely one big decision; it is a thousand small ones made with intent.</p>
+          <p class="mt-5 text-lg leading-8 text-blueprint-mute">I currently lead engineering work at Roshoon, where I help shape technical architecture, planning, and team execution. Alongside product work, I am diving deeper into AWS, DevOps practices, and system design, while sharing programming tutorials on YouTube for developers who want practical, field-tested learning.</p>
+        </article>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="blueprint-panel lift-card reveal rounded p-5" style="--delay: 80ms;"><p class="font-mono text-3xl font-bold text-blueprint-cyan">3+</p><p class="mt-2 text-sm text-blueprint-mute">Years Experience</p></div>
+          <div class="blueprint-panel lift-card reveal rounded p-5" style="--delay: 150ms;"><p class="font-mono text-3xl font-bold text-blueprint-cyan">2</p><p class="mt-2 text-sm text-blueprint-mute">SaaS Products Built</p></div>
+          <div class="blueprint-panel lift-card reveal rounded p-5" style="--delay: 220ms;"><p class="font-mono text-3xl font-bold text-blueprint-amber">1</p><p class="mt-2 text-sm text-blueprint-mute">Best Paper Award</p></div>
+          <div class="blueprint-panel lift-card reveal rounded p-5" style="--delay: 290ms;"><p class="font-mono text-2xl font-bold text-blueprint-green">Dean's</p><p class="mt-2 text-sm text-blueprint-mute">Scholarship</p></div>
+          <div class="blueprint-panel lift-card reveal col-span-2 rounded p-5" style="--delay: 360ms;"><p class="font-mono text-3xl font-bold text-white">5/5</p><p class="mt-2 text-sm text-blueprint-mute">SSC GPA</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div class="reveal mb-10">
+        <p class="section-kicker font-mono text-sm uppercase text-blueprint-cyan">Skills</p>
+        <h2 class="mt-4 font-mono text-3xl font-bold text-white sm:text-4xl">Practical tools for resilient products.</h2>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        <article class="blueprint-panel reveal rounded p-6">
+          <h3 class="mb-5 flex items-center gap-3 font-mono text-lg font-bold text-white"><span class="text-blueprint-cyan">{ }</span> Backend</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 40ms;">Node.js</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 90ms;">Express.js</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 140ms;">PostgreSQL</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 190ms;">MongoDB</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 240ms;">Redis</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 290ms;">RabbitMQ</span>
+          </div>
+        </article>
+        <article class="blueprint-panel reveal rounded p-6" style="--delay: 80ms;">
+          <h3 class="mb-5 flex items-center gap-3 font-mono text-lg font-bold text-white"><span class="text-blueprint-green">&lt;/&gt;</span> Frontend/Mobile</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 40ms;">Next.js</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 90ms;">React.js</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 140ms;">Flutter</span>
+          </div>
+        </article>
+        <article class="blueprint-panel reveal rounded p-6" style="--delay: 160ms;">
+          <h3 class="mb-5 flex items-center gap-3 font-mono text-lg font-bold text-white"><span class="text-blueprint-amber">ops</span> DevOps &amp; Infra</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 40ms;">Docker</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 90ms;">AWS</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 140ms;">DigitalOcean</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 190ms;">Load Balancing</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 240ms;">Pub/Sub</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 290ms;">Message Queues</span>
+          </div>
+        </article>
+        <article class="blueprint-panel reveal rounded p-6" style="--delay: 240ms;">
+          <h3 class="mb-5 flex items-center gap-3 font-mono text-lg font-bold text-white"><span class="text-blueprint-cyan">+</span> Other</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 40ms;">Python</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 90ms;">Selenium</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 140ms;">n8n Automation</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 190ms;">Stripe API</span>
+            <span class="skill-pill rounded border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-sm text-blueprint-ink" style="--delay: 240ms;">OpenAI API</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div class="reveal mb-12">
+        <p class="section-kicker font-mono text-sm uppercase text-blueprint-cyan">Experience</p>
+        <h2 class="mt-4 font-mono text-3xl font-bold text-white sm:text-4xl">A timeline of building and leading.</h2>
+      </div>
+      <div class="relative ml-2 border-l border-cyan-300/20 pl-8 sm:ml-4 sm:pl-10">
+        <article class="reveal relative mb-8">
+          <span class="timeline-dot absolute -left-[2.73rem] top-6 h-3.5 w-3.5 rounded-full bg-blueprint-cyan sm:-left-[3.23rem]"></span>
+          <div class="blueprint-panel lift-card rounded p-6">
+            <p class="font-mono text-sm text-blueprint-cyan">Jan 2025-Present | Remote (US)</p>
+            <h3 class="mt-2 text-xl font-bold text-white">Team Lead @ Roshoon</h3>
+            <p class="mt-3 text-blueprint-mute">Leading a 5-person team across sprint planning, technical architecture, and product execution.</p>
+          </div>
+        </article>
+        <article class="reveal relative mb-8" style="--delay: 80ms;">
+          <span class="timeline-dot absolute -left-[2.73rem] top-6 h-3.5 w-3.5 rounded-full bg-blueprint-cyan sm:-left-[3.23rem]"></span>
+          <div class="blueprint-panel lift-card rounded p-6">
+            <p class="font-mono text-sm text-blueprint-cyan">Dec 2024-Jan 2025</p>
+            <h3 class="mt-2 text-xl font-bold text-white">Backend Developer @ Roshoon</h3>
+            <p class="mt-3 text-blueprint-mute">Built backend systems for multi-vendor ecommerce workflows, including Stripe Identity Verification.</p>
+          </div>
+        </article>
+        <article class="reveal relative mb-8" style="--delay: 160ms;">
+          <span class="timeline-dot absolute -left-[2.73rem] top-6 h-3.5 w-3.5 rounded-full bg-blueprint-cyan sm:-left-[3.23rem]"></span>
+          <div class="blueprint-panel lift-card rounded p-6">
+            <p class="font-mono text-sm text-blueprint-cyan">Jun 2024-Feb 2026 | Part-time</p>
+            <h3 class="mt-2 text-xl font-bold text-white">Backend Developer @ Avaton</h3>
+            <p class="mt-3 text-blueprint-mute">Worked on n8n automation, scraping systems, and Node.js APIs for operational workflows.</p>
+          </div>
+        </article>
+        <article class="reveal relative mb-8" style="--delay: 240ms;">
+          <span class="timeline-dot absolute -left-[2.73rem] top-6 h-3.5 w-3.5 rounded-full bg-blueprint-cyan sm:-left-[3.23rem]"></span>
+          <div class="blueprint-panel lift-card rounded p-6">
+            <p class="font-mono text-sm text-blueprint-cyan">May 2023-Dec 2024</p>
+            <h3 class="mt-2 text-xl font-bold text-white">Software Engineer @ Microdeft</h3>
+            <p class="mt-3 text-blueprint-mute">Built product features with Next.js, Node.js, Flutter, and Python Selenium automation.</p>
+          </div>
+        </article>
+        <article class="reveal relative" style="--delay: 320ms;">
+          <span class="timeline-dot absolute -left-[2.73rem] top-6 h-3.5 w-3.5 rounded-full bg-blueprint-cyan sm:-left-[3.23rem]"></span>
+          <div class="blueprint-panel lift-card rounded p-6">
+            <p class="font-mono text-sm text-blueprint-cyan">Jan 2023-Apr 2023</p>
+            <h3 class="mt-2 text-xl font-bold text-white">Software Engineer Intern @ Microdeft</h3>
+            <p class="mt-3 text-blueprint-mute">Shipped React.js features and integrated OpenAI API workflows into production-facing interfaces.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div class="reveal mb-10">
+        <p class="section-kicker font-mono text-sm uppercase text-blueprint-cyan">Projects</p>
+        <h2 class="mt-4 font-mono text-3xl font-bold text-white sm:text-4xl">Systems with product pressure.</h2>
+      </div>
+      <div class="grid gap-5 lg:grid-cols-2">
+        <article class="project-card blueprint-panel lift-card reveal rounded p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="font-mono text-2xl font-bold text-white">Quiz Mint</h3>
+            <span class="rounded border border-cyan-300/20 px-2 py-1 font-mono text-xs text-blueprint-cyan">SaaS</span>
+          </div>
+          <p class="mt-4 leading-7 text-blueprint-mute">Educational Institution Management SaaS built in 1 month with AI-assisted development. First paying customer acquired during development.</p>
+          <div class="stack-reveal mt-5">
+            <p class="mb-3 font-mono text-xs uppercase text-blueprint-cyan">Tech Stack</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Full-stack SaaS</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">DB optimization</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Caching</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Scaling</span>
+            </div>
+          </div>
+        </article>
+        <article class="project-card blueprint-panel lift-card reveal rounded p-6" style="--delay: 90ms;">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="font-mono text-2xl font-bold text-white">AI Expense Tracker</h3>
+            <a href="https://www.youtube.com/results?search_query=AI+Expense+Tracker+Mainul+Hasan+Rifat" target="_blank" rel="noreferrer" class="rounded border border-cyan-300/25 px-2 py-1 font-mono text-xs text-blueprint-cyan transition hover:border-cyan-300/70">Demo Video</a>
+          </div>
+          <p class="mt-4 leading-7 text-blueprint-mute">Bangladesh's first AI-powered expense tracker with Bangla + English NLP, voice input, and receipt scanning.</p>
+          <div class="stack-reveal mt-5">
+            <p class="mb-3 font-mono text-xs uppercase text-blueprint-cyan">Tech Stack</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Next.js</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Node.js</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">MongoDB</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Telegram Bot</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">NLP</span>
+            </div>
+          </div>
+        </article>
+        <article class="project-card blueprint-panel lift-card reveal rounded p-6" style="--delay: 180ms;">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="font-mono text-2xl font-bold text-white">Codesharer</h3>
+            <span class="rounded border border-cyan-300/20 px-2 py-1 font-mono text-xs text-blueprint-cyan">Realtime</span>
+          </div>
+          <p class="mt-4 leading-7 text-blueprint-mute">Real-time collaborative code sharing platform with snippet management and fast team handoff workflows.</p>
+          <div class="stack-reveal mt-5">
+            <p class="mb-3 font-mono text-xs uppercase text-blueprint-cyan">Tech Stack</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Node.js</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Socket.io</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">PostgreSQL</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Next.js</span>
+            </div>
+          </div>
+        </article>
+        <article class="project-card blueprint-panel lift-card reveal rounded p-6" style="--delay: 270ms;">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="font-mono text-2xl font-bold text-white">Nonacademy</h3>
+            <span class="rounded border border-cyan-300/20 px-2 py-1 font-mono text-xs text-blueprint-cyan">EdTech</span>
+          </div>
+          <p class="mt-4 leading-7 text-blueprint-mute">EdTech platform with course delivery workflows and video storage on AWS S3.</p>
+          <div class="stack-reveal mt-5">
+            <p class="mb-3 font-mono text-xs uppercase text-blueprint-cyan">Tech Stack</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Node.js</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">MongoDB</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">Next.js</span>
+              <span class="rounded bg-white/5 px-2 py-1 text-xs text-blueprint-ink">AWS S3</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="education" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div class="reveal mb-10">
+        <p class="section-kicker font-mono text-sm uppercase text-blueprint-cyan">Education</p>
+        <h2 class="mt-4 font-mono text-3xl font-bold text-white sm:text-4xl">Academic foundation.</h2>
+      </div>
+      <div class="grid gap-5 lg:grid-cols-3">
+        <article class="blueprint-panel lift-card reveal rounded p-6">
+          <p class="font-mono text-sm text-blueprint-cyan">BSc CSE</p>
+          <h3 class="mt-3 text-xl font-bold text-white">East West University</h3>
+          <p class="mt-3 text-blueprint-mute">CGPA 3.46/4, Dean's Scholarship for 3 consecutive semesters.</p>
+        </article>
+        <article class="blueprint-panel lift-card reveal rounded p-6" style="--delay: 100ms;">
+          <p class="font-mono text-sm text-blueprint-cyan">HSC</p>
+          <h3 class="mt-3 text-xl font-bold text-white">Rajshahi Govt. City College</h3>
+          <p class="mt-3 text-blueprint-mute">GPA 4.58/5.</p>
+        </article>
+        <article class="blueprint-panel lift-card reveal rounded p-6" style="--delay: 200ms;">
+          <p class="font-mono text-sm text-blueprint-cyan">SSC</p>
+          <h3 class="mt-3 text-xl font-bold text-white">Harimohan Govt. High School</h3>
+          <p class="mt-3 text-blueprint-mute">GPA 5/5.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="awards" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div class="reveal mb-10">
+        <p class="section-kicker font-mono text-sm uppercase text-blueprint-cyan">Awards &amp; Publications</p>
+        <h2 class="mt-4 font-mono text-3xl font-bold text-white sm:text-4xl">Research that reached the room.</h2>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        <article class="blueprint-panel lift-card reveal rounded p-6">
+          <p class="font-mono text-3xl" aria-hidden="true">🏆</p>
+          <h3 class="mt-4 text-xl font-bold text-white">Best Paper Award, ICO 2023 (Thailand)</h3>
+          <p class="mt-3 text-blueprint-mute">E-waste Management app with role-based Android system.</p>
+        </article>
+        <article class="blueprint-panel lift-card reveal rounded p-6" style="--delay: 120ms;">
+          <p class="font-mono text-3xl" aria-hidden="true">📄</p>
+          <h3 class="mt-4 text-xl font-bold text-white">Published Research</h3>
+          <p class="mt-3 text-blueprint-mute">E-waste Management and Recycling Model for Dhaka.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div class="reveal mb-10">
+        <p class="section-kicker font-mono text-sm uppercase text-blueprint-cyan">Contact</p>
+        <h2 class="mt-4 font-mono text-3xl font-bold text-white sm:text-4xl">Let's talk systems, teams, and products.</h2>
+      </div>
+      <div class="grid gap-8 lg:grid-cols-[.95fr_1.05fr]">
+        <div class="blueprint-panel reveal rounded p-6 sm:p-8">
+          <p class="text-lg leading-8 text-blueprint-mute">Based in Rajshahi, Bangladesh, working with teams that care about clean architecture, fast iteration, and practical engineering decisions.</p>
+          <div class="mt-8 grid gap-3">
+            <a href="mailto:mdrifatbd5@gmail.com" class="lift-card rounded border border-cyan-300/15 px-4 py-3 text-blueprint-ink hover:text-blueprint-cyan">Email · mdrifatbd5@gmail.com</a>
+            <a href="https://github.com/mainulhasan05" target="_blank" rel="noreferrer" class="lift-card rounded border border-cyan-300/15 px-4 py-3 text-blueprint-ink hover:text-blueprint-cyan">GitHub · github.com/mainulhasan05</a>
+            <a href="https://linkedin.com/in/md-mainul-hasan-bb0833225" target="_blank" rel="noreferrer" class="lift-card rounded border border-cyan-300/15 px-4 py-3 text-blueprint-ink hover:text-blueprint-cyan">LinkedIn · linkedin.com/in/md-mainul-hasan-bb0833225</a>
+            <a href="https://www.youtube.com/results?search_query=Mainul+Hasan+Rifat+programming+tutorials" target="_blank" rel="noreferrer" class="lift-card rounded border border-cyan-300/15 px-4 py-3 text-blueprint-ink hover:text-blueprint-cyan">YouTube · Mainul Hasan Rifat</a>
+            <a href="https://rifatewu.blogspot.com" target="_blank" rel="noreferrer" class="lift-card rounded border border-cyan-300/15 px-4 py-3 text-blueprint-ink hover:text-blueprint-cyan">Blog · rifatewu</a>
+          </div>
+        </div>
+        <form id="contactForm" class="blueprint-panel reveal rounded p-6 sm:p-8" style="--delay: 120ms;">
+          <div class="grid gap-5">
+            <label class="grid gap-2">
+              <span class="font-mono text-sm text-blueprint-cyan">Name</span>
+              <input class="form-input rounded px-4 py-3" name="name" type="text" autocomplete="name" placeholder="Your name" />
+            </label>
+            <label class="grid gap-2">
+              <span class="font-mono text-sm text-blueprint-cyan">Email</span>
+              <input class="form-input rounded px-4 py-3" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+            </label>
+            <label class="grid gap-2">
+              <span class="font-mono text-sm text-blueprint-cyan">Message</span>
+              <textarea class="form-input min-h-36 rounded px-4 py-3" name="message" placeholder="What are you building?"></textarea>
+            </label>
+            <button class="inline-flex items-center justify-center border border-cyan-300/60 bg-blueprint-cyan px-5 py-3 font-mono text-sm font-bold text-[#06111d] shadow-glow transition hover:-translate-y-0.5 hover:bg-white" type="submit">Send Message</button>
+            <p id="formStatus" class="hidden font-mono text-sm text-blueprint-green" role="status">Message UI ready. Please use email for delivery.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-cyan-300/10 px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-3 text-sm text-blueprint-mute sm:flex-row">
+      <p class="font-mono text-blueprint-ink">Md. Mainul Hasan</p>
+      <p>Designed &amp; built by Mainul · <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script>
+    const roles = ['Backend Engineer', 'System Designer', 'DevOps Learner', 'AWS Explorer'];
+    const typewriter = document.querySelector('#typewriter');
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeLoop() {
+      const current = roles[roleIndex];
+      const nextText = deleting ? current.slice(0, charIndex - 1) : current.slice(0, charIndex + 1);
+      typewriter.textContent = nextText;
+      charIndex = nextText.length;
+
+      let delay = deleting ? 42 : 78;
+      if (!deleting && charIndex === current.length) {
+        delay = 1350;
+        deleting = true;
+      } else if (deleting && charIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        delay = 240;
+      }
+
+      window.setTimeout(typeLoop, delay);
+    }
+
+    typeLoop();
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -70px 0px' });
+
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.getAttribute('id');
+        document.querySelectorAll('.nav-link').forEach((link) => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+        });
+      });
+    }, { threshold: 0.35, rootMargin: '-20% 0px -45% 0px' });
+
+    document.querySelectorAll('main section[id]').forEach((section) => sectionObserver.observe(section));
+
+    const menuButton = document.querySelector('#menuButton');
+    const mobileMenu = document.querySelector('#mobileMenu');
+    const menuIcon = document.querySelector('#menuIcon');
+
+    menuButton.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('hidden') === false;
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuIcon.innerHTML = open
+        ? '<path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
+        : '<path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuIcon.innerHTML = '<path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+      });
+    });
+
+    document.querySelector('#contactForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      document.querySelector('#formStatus').classList.remove('hidden');
+    });
+
+    document.querySelector('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
